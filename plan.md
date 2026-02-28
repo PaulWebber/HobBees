@@ -132,8 +132,5 @@ At the top of each box of Categories there should be buttons for 'Add New' which
 
 ## Technologies used
 1. FastAPI
-2. Database back end either Postgres or MongoDB 
-3. Front End will be either React or HTMX
-
-## Future
-Android app, open source so it can be on F-Droid
+2. Database back-end MongoDB or other free JSON based software 
+3. Front End will be React
