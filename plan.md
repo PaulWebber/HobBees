@@ -41,6 +41,7 @@ If the database already has one or more Hobby's entrered then the main screen wi
 3. Sub Categories (e.g. for Latex would be things like thickness, Colour, Brand etc)
 
 ### Example Hierarchy in JSON
+```json
 {
   "Hobbys": {
     "Slingshot": {
@@ -123,6 +124,7 @@ If the database already has one or more Hobby's entrered then the main screen wi
     }
   }
 }
+```
 
 When a Hobby is selected, then the "Burger' menu will have these options so it is contextual:
 - New Category
