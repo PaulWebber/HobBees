@@ -161,7 +161,9 @@ For detailed API documentation with examples, visit http://localhost:8000/docs w
 
 ## Testing
 
-### Backend Tests
+HobBees includes comprehensive test coverage with both backend unit tests and end-to-end tests.
+
+### Backend Tests (pytest)
 ```bash
 cd backend
 pytest
@@ -171,6 +173,20 @@ pytest
 ```bash
 pytest --cov=app --cov-report=html
 ```
+
+### E2E Tests (Playwright)
+```bash
+cd frontend
+npx playwright install  # First time only
+npm run test:e2e
+```
+
+### Interactive E2E Testing
+```bash
+npm run test:e2e:ui
+```
+
+For detailed testing documentation, see [TESTING.md](TESTING.md).
 
 ## Data Model
 

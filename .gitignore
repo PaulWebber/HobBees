@@ -52,6 +52,9 @@ Thumbs.db
 .coverage
 htmlcov/
 .pytest_cache/
+test-results/
+playwright-report/
+playwright/.cache/
 
 # Docker
 *.log
