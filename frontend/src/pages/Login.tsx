@@ -14,9 +14,18 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [passwordByteLength, setPasswordByteLength] = useState(0)
   
   const { login, register } = useAuth()
   const navigate = useNavigate()
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value
+    setPassword(newPassword)
+    // Calculate byte length
+    const byteLength = new TextEncoder().encode(newPassword).length
+    setPasswordByteLength(byteLength)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -24,6 +33,14 @@ const Login = () => {
     setIsLoading(true)
 
     try {
+      // Validate password length (bcrypt has 72-byte limit)
+      const passwordBytes = new TextEncoder().encode(password).length
+      if (passwordBytes > 72) {
+        setError('Password is too long. Maximum is 72 bytes. Please use a shorter password.')
+        setIsLoading(false)
+        return
+      }
+
       if (isRegisterMode) {
         await register(username, email, password)
       } else {
@@ -78,10 +95,16 @@ const Login = () => {
             label="Password"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             required
             placeholder="Enter your password"
           />
+          {isRegisterMode && passwordByteLength > 60 && (
+            <p className={`text-xs mt-1 ${passwordByteLength > 72 ? 'text-red-600' : 'text-yellow-600'}`}>
+              Password length: {passwordByteLength}/72 bytes
+              {passwordByteLength > 72 && ' - Too long!'}
+            </p>
+          )}
 
           <Button
             type="submit"
